@@ -54,10 +54,26 @@ public class Player : MonoBehaviour {
             }
         }
 
-        rb.velocity = new Vector2(horizontal, vertical);
+        rb.linearVelocity = new Vector2(horizontal, vertical);
 
         if (Input.GetKeyDown("e")) {
             Interact();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.TryGetComponent(out BattleArena battleArena))
+        {
+            Debug.Log("HasDamage");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Shuriken shuriken))
+        {
+            Debug.Log("HasDamage");
         }
     }
 
